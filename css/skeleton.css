@@ -33,13 +33,11 @@
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box; }
+  padding: 0 20px; }
 .column,
 .columns {
   width: 100%;
-  float: left;
-  box-sizing: border-box; }
+  float: left; }
 
 /* For devices larger than 400px */
 @media (min-width: 400px) {
@@ -119,7 +117,10 @@
 html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  box-sizing: border-box; }
+*, *::before, *::after {
+  box-sizing: inherit; }
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
@@ -184,9 +185,8 @@ input[type="button"] {
   white-space: nowrap;
   background-color: transparent;
   border-radius: 4px;
-  border: 1px solid #bbb;
-  cursor: pointer;
-  box-sizing: border-box; }
+  border: 1px solid #BBB;
+  cursor: pointer; }
 .button:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -200,6 +200,18 @@ input[type="button"]:focus {
   color: #333;
   border-color: #888;
   outline: 0; }
+.button:disabled {
+  border: 1px solid #E3E3E3;
+  color: #888;
+  cursor: not-allowed;
+}
+.button:active,
+button:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active{
+  color: #222;
+  border-color: #222; }
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,
@@ -221,12 +233,30 @@ input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #1EAEDB;
   border-color: #1EAEDB; }
+.button.button-primary:disabled,
+button.button-primary:disabled,
+input[type="submit"].button-primary:disabled,
+input[type="reset"].button-primary:disabled,
+input[type="button"].button-primary:disabled {
+  color: #FFF;
+  cursor: not-allowed;
+  background-color: #7CD9F8;
+  border-color: #7CD9F8; }
+.button.button-primary:active,
+button.button-primary:active,
+input[type="submit"].button-primary:active,
+input[type="reset"].button-primary:active,
+input[type="button"].button-primary:active{
+  color: #FFF;
+  background-color: #157b9b;
+  border-color: #157b9b; }
 
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 input[type="email"],
 input[type="number"],
+input[type="date"],
 input[type="search"],
 input[type="text"],
 input[type="tel"],
@@ -234,14 +264,11 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
-  height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-  background-color: #fff;
+  background-color: #FFF;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
-  box-shadow: none;
-  box-sizing: border-box; }
-/* Removes awkward default styles on some inputs for iOS */
+  box-shadow: none; }
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -249,6 +276,20 @@ input[type="text"],
 input[type="tel"],
 input[type="url"],
 input[type="password"],
+select:not([size]),
+textarea:not([rows]) {
+  height: 38px; }
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="button"],
+input[type="submit"],
 textarea {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -259,6 +300,7 @@ textarea {
   padding-bottom: 6px; }
 input[type="email"]:focus,
 input[type="number"]:focus,
+input[type="date"]:focus,
 input[type="search"]:focus,
 input[type="text"]:focus,
 input[type="tel"]:focus,
@@ -317,11 +359,16 @@ code {
 pre > code {
   display: block;
   padding: 1rem 1.5rem;
-  white-space: pre; }
+  white-space: pre;
+  overflow: auto; }
 
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; }
 th,
 td {
   padding: 12px 15px;
@@ -360,11 +407,9 @@ form {
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .u-full-width {
-  width: 100%;
-  box-sizing: border-box; }
+  width: 100%; }
 .u-max-full-width {
-  max-width: 100%;
-  box-sizing: border-box; }
+  max-width: 100%; }
 .u-pull-right {
   float: right; }
 .u-pull-left {
